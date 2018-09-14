@@ -1,0 +1,14 @@
+# There are the default property values so can be omitted if being used
+web3j:
+  client-address: http://localhost:8545
+  admin-client: false
+
+spring:
+  mvc:
+    view:
+      prefix: /WEB-INF/jsp/
+      suffix: .jsp
+wallet:
+  credential:
+    source: ${WALLET_CREDENTIAL_SOURCE}
+    password: ${WALLET_CREDENTIAL_PASSWORD}
