@@ -1,4 +1,4 @@
-# RayonProtocol KYC Systyem Prototype
+# RayonProtocol KYC Systyem
 
 This is a prototype of RayonProtocol's KYC System
 
