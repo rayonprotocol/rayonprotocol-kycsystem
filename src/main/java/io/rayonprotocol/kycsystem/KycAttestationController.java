@@ -1,10 +1,10 @@
 package io.rayonprotocol.kycsystem;
 
 import java.io.IOException;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,8 +28,7 @@ public class KycAttestationController {
 
   @RequestMapping(value = "/{address}", method = RequestMethod.GET)
   @ResponseBody
-  public String attest(@PathVariable("address") String address, @RequestParam("personalId") String personalId) throws IOException, CipherException {
-    String signature = web3jService.sign(personalId);
-    return address + ": " + signature;
+  public Map<String, String> attest(@PathVariable("address") String address, @RequestParam("personalId") String personalId) throws IOException, CipherException {
+    return web3jService.signWithAddressPrefix(personalId, address);
   }
 }

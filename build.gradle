@@ -29,7 +29,7 @@ repositories {
 
 dependencies {
 	compileOnly 'org.projectlombok:lombok:1.18.2'
-	compile 'org.web3j:web3j-spring-boot-starter:1.0.0'
+	compile 'org.web3j:web3j-spring-boot-starter:1.6.0'
 	compile('org.springframework.boot:spring-boot-starter-web')
 	compile('javax.servlet:jstl')
 	compile("org.apache.tomcat.embed:tomcat-embed-jasper")
