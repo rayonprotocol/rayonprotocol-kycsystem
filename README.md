@@ -1,6 +1,6 @@
-# RayonProtocol KYC Systyem Prototype
+# RayonProtocol KYC System
 
-This is a prototype of RayonProtocol's KYC System
+This is RayonProtocol's KYC System
 
 
 ## About
@@ -23,7 +23,7 @@ export WALLET_CREDENTIAL_SOURCE=path/to/your/keyfile
 export WALLET_CREDENTIAL_PASSWORD=passwordForKeyfile
 ```
 
-### startup
+### Startup
 ```
 gradle bootRun
 ```
