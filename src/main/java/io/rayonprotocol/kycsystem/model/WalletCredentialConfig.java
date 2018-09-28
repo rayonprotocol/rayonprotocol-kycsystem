@@ -1,21 +1,19 @@
-package io.rayonprotocol.kycsystem;
+package io.rayonprotocol.kycsystem.model;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
 @Configuration
 @ConfigurationProperties(prefix="wallet.credential")
+@Data
 public class WalletCredentialConfig {
   
   /**
    * keystore file path
    */
-  @Getter @Setter
   private String source;
   
-  @Getter @Setter
   private String password;
 }
