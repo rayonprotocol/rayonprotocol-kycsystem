@@ -22,12 +22,21 @@ public class KycAttestationDataController {
     public void initWalletCredential(String password) throws IOException, CipherException {
         walletAgent.initCredentials(password);
     }
-    
 
+    /**
+     * sign message with prefixAddress by attestor wallet
+     * 
+     * @param message signing message
+     * @param prefixAddresss address to prefix message 
+     * @return messageHash, attestorAddress, r, s, v for signuate
+     * @throws IOException
+     * @throws CipherException
+     */
     public Attestation signWithAddressPrefix(String message, String prefixAddresss) 
             throws IOException, CipherException {
         final Attestation attestation = new Attestation();
         final String messageHash = Hash.sha3(Numeric.toHexStringNoPrefix(message.getBytes()));
+        // trim hex prefix off messageHash then prefix adderess to it
         final String addressPrefixedMessage = prefixAddresss.concat(messageHash.replace("0x", ""));
         final String addressPrefixedMessageHash = Hash.sha3(addressPrefixedMessage);
 

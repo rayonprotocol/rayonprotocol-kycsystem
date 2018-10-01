@@ -21,6 +21,12 @@ public class WalletAgent {
 
     private Credentials credentials;
 
+    /**
+     * load crediential with password and pre-configured keystore
+     * @param password for keystore
+     * @throws IOException
+     * @throws CipherException
+     */
     public void initCredentials(@NotBlank String password) throws IOException, CipherException {
         this.credentials = WalletUtils.loadCredentials(password, walletCredentialConfig.getSource());
     }
