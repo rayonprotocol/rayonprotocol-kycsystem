@@ -1,6 +1,6 @@
-# RayonProtocol KYC Systyem
+# RayonProtocol KYC System
 
-This is a prototype of RayonProtocol's KYC System
+This is RayonProtocol's KYC System
 
 
 ## About
@@ -10,20 +10,20 @@ This is a prototype of RayonProtocol's KYC System
 
 ## Getting Started
 
-### Installing
+### Prerequisite
 
-- install all dependencies
+- [Java 8](https://www.oracle.com/technetwork/java/index.html)
 
+- [Gradle 4](https://gradle.org/install/)
+
+- Set enviroment variables for wallet configuration used in 
+`/src/main/resources/application.yml`
 ```bash
-yarn
+export WALLET_CREDENTIAL_SOURCE=path/to/your/keyfile
+export WALLET_CREDENTIAL_PASSWORD=passwordForKeyfile
 ```
 
-- Complete `.env.example` file to set enviroment variables used for configuration and rename to `.env`
-
-### Running the tests
-```bash
-# test with coverage
-yarn test 
-# open coverage reports
-open coverage/index.html
+### Startup
+```
+gradle bootRun
 ```
