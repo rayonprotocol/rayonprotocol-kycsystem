@@ -5,9 +5,10 @@ import lombok.Data;
 
 @Data
 public class AttestationRequestBody {
+  // user address
   @NotBlank
-  private String address;
+  private String userId;
   
   @NotBlank
-  private String personalId;
+  private String userAuth;
 }

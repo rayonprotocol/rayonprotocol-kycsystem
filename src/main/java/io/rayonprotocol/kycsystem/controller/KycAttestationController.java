@@ -25,6 +25,7 @@ import io.rayonprotocol.kycsystem.exception.CredentialNotInitiatedException;
 import io.rayonprotocol.kycsystem.model.ErrorDetails;
 import io.rayonprotocol.kycsystem.model.Attestation;
 import io.rayonprotocol.kycsystem.model.AttestationRequestBody;
+import io.rayonprotocol.kycsystem.model.Attester;
 import io.rayonprotocol.kycsystem.model.CredentialRequestBody;
 
 @Controller
@@ -38,24 +39,29 @@ public class KycAttestationController {
     return "index";
   }
 
+  @RequestMapping("/health")
+  @ResponseStatus(HttpStatus.OK)
+  public void health(Model model) {}
+
   @RequestMapping("/attester")
   @ResponseBody
-  public String attester() {
-    return dataController.getAttesterAddress();
+  public Attester attester() throws CredentialNotInitiatedException {
+    return new Attester(dataController.getAttesterAddress());
   }
 
-  @RequestMapping(value = "/attestation", method = RequestMethod.POST)
+  @RequestMapping(value = "/attest", method = RequestMethod.POST)
   @ResponseBody
   public Attestation attest(@Valid @RequestBody AttestationRequestBody attestationReqestBody)
-      throws IOException, CipherException {
-    return dataController.signWithAddressPrefix(attestationReqestBody.getPersonalId(),
-        attestationReqestBody.getAddress());
+      throws IOException, CipherException, CredentialNotInitiatedException {
+    return dataController.signWithAddressPrefix(attestationReqestBody.getUserAuth(),
+        attestationReqestBody.getUserId());
   }
 
-  @RequestMapping(value = "/credential", method = RequestMethod.POST)
+  @RequestMapping(value = "/initcredential", method = RequestMethod.POST)
   @ResponseStatus(HttpStatus.OK)
   public void initCredential(@Valid @RequestBody CredentialRequestBody credentialRequestBody, HttpServletRequest request)
       throws IOException, CipherException {
+    // only local request accepted
     if (!request.getRemoteAddr().equals(request.getLocalAddr())) {
       throw new HttpClientErrorException(HttpStatus.UNAUTHORIZED);
     }

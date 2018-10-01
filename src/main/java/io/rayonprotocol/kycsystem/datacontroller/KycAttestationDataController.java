@@ -10,6 +10,7 @@ import org.web3j.crypto.Sign;
 import org.web3j.utils.Numeric;
 
 import io.rayonprotocol.kycsystem.agent.WalletAgent;
+import io.rayonprotocol.kycsystem.exception.CredentialNotInitiatedException;
 import io.rayonprotocol.kycsystem.model.Attestation;
 
 @Service
@@ -26,14 +27,15 @@ public class KycAttestationDataController {
     /**
      * sign message with prefixAddress by attestor wallet
      * 
-     * @param message signing message
-     * @param prefixAddresss address to prefix message 
+     * @param message        signing message
+     * @param prefixAddresss address to prefix message
      * @return messageHash, attestorAddress, r, s, v for signuate
      * @throws IOException
      * @throws CipherException
+     * @throws CredentialNotInitiatedException
      */
     public Attestation signWithAddressPrefix(String message, String prefixAddresss) 
-            throws IOException, CipherException {
+            throws IOException, CipherException, CredentialNotInitiatedException {
         final Attestation attestation = new Attestation();
         final String messageHash = Hash.sha3(Numeric.toHexStringNoPrefix(message.getBytes()));
         // trim hex prefix off messageHash then prefix adderess to it
@@ -45,15 +47,15 @@ public class KycAttestationDataController {
             walletAgent.getEcKeyPair(),
             false // no need to hash message again
         );
-        attestation.setMessageHash(messageHash);
-        attestation.setAttesterAddress(walletAgent.getAddress());
+        attestation.setAttesterId(walletAgent.getAddress());
+        attestation.setAuthHash(messageHash);
         attestation.setR(Numeric.toHexString(signature.getR()));
         attestation.setS(Numeric.toHexString(signature.getS()));
         attestation.setV(Integer.toString(signature.getV()));
         return attestation;
     }
 
-    public String getAttesterAddress() {
+    public String getAttesterAddress() throws CredentialNotInitiatedException {
         return walletAgent.getAddress();
     }
 }

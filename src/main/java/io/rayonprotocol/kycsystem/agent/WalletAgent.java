@@ -31,17 +31,13 @@ public class WalletAgent {
         this.credentials = WalletUtils.loadCredentials(password, walletCredentialConfig.getSource());
     }
 
-    public void checkCredentialInitiaited() {
+    final public String getAddress() throws CredentialNotInitiatedException {
         if (this.credentials == null) throw new CredentialNotInitiatedException();
-    }
-
-    public String getAddress() {
-        checkCredentialInitiaited();
         return this.credentials.getAddress();
     }
 
-    public ECKeyPair getEcKeyPair() {
-        checkCredentialInitiaited();
+    final public ECKeyPair getEcKeyPair() throws CredentialNotInitiatedException {
+        if (this.credentials == null) throw new CredentialNotInitiatedException();
         return this.credentials.getEcKeyPair();
     }
 }

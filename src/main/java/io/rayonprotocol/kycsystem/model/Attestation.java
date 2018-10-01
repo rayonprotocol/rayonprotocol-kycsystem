@@ -3,9 +3,9 @@ import lombok.Data;
 
 @Data
 public class Attestation {
-  private String messageHash;
-
-  private String attesterAddress;
+  private String attesterId;
+  
+  private String authHash;
 
   private String r;
 
