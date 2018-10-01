@@ -12,4 +12,3 @@ spring:
 wallet:
   credential:
     source: ${WALLET_CREDENTIAL_SOURCE}
-    password: ${WALLET_CREDENTIAL_PASSWORD}

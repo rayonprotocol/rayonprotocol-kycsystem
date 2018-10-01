@@ -16,11 +16,10 @@ This is RayonProtocol's KYC System
 
 - [Gradle 4](https://gradle.org/install/)
 
-- Set enviroment variables for wallet configuration used in 
+- Set an enviroment variable for wallet configuration used in 
 `/src/main/resources/application.yml`
 ```bash
 export WALLET_CREDENTIAL_SOURCE=path/to/your/keyfile
-export WALLET_CREDENTIAL_PASSWORD=passwordForKeyfile
 ```
 
 ### Startup
